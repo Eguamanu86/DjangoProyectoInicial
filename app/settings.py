@@ -82,10 +82,10 @@ DATABASES = {
         'ENGINE': os.getenv("DB_ENGINE"),
         'NAME': os.getenv("DB_DATABASE"),
         'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'PASSWORD': os.getenv("DB_PASSWORD_1"),
         'HOST': os.getenv("DB_HOST"),
         'PORT': os.getenv("DB_PORT"),
-        'ATOMIC_REQUESTS': True
+        'ATOMIC_REQUESTS': False
     }
 }
 
