@@ -1,0 +1,85 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+db.sqlite3
+*.mo
+
+# Media files
+/media
+
+# Static file cache
+/staticfiles/
+/static/
+
+# Environment
+.env
+.env.*
+
+# VSCode settings
+.vscode/
+
+# IDEs
+.idea/
+*.swp
+
+# Virtualenv
+venv/
+env/
+ENV/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pyre
+.pyre/
+
+# pytest
+.cache
+.pytest_cache/
+
+# coverage
+htmlcov/
+.coverage
+.coverage.*
+
+# celery
+celerybeat-schedule
+celerybeat.pid
+
+# Heroku
+*.pid
+
+# Docker
+*.bak
+*.backup
+*.pid
+docker-compose.override.yml
+
+# Node (si usas npm o yarn con Django)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
