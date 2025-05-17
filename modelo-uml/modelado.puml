@@ -1,0 +1,227 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "Sistema SOS Life" {
+
+  class Pais {
+    +id: UUID
+    +nombre: String
+  }
+
+  class Provincia {
+    +id: UUID
+    +nombre: String
+    +pais_id: UUID
+  }
+
+  class Ciudad {
+    +id: UUID
+    +nombre: String
+    +provincia_id: UUID
+  }
+
+  class Zona {
+    +id: UUID
+    +nombre: String
+    +descripcion: String
+    +nivel_riesgo: Integer <<0-10>>
+    +geom: Geometry
+    +ciudad_id: UUID
+
+    +actualizarRiesgo(): void
+    +evaluarIncidentes(): List<Reporte>
+  }
+
+  class Ubicacion {
+    +id: UUID
+    +latitud: Decimal
+    +longitud: Decimal
+    +direccion: String
+    +zona_riesgo: Boolean
+    +timestamp: DateTime
+    +zona_id: UUID
+
+    +registrarUbicacion(): void
+    +actualizarZonaRiesgo(): void
+  }
+
+  class Usuario {
+    +id: UUID
+    +nombres: String
+    +apellidos: String
+    +email: String
+    +password: String
+    +telefono: String
+    +tipo_usuario: String <<Enum>>
+    +activo: Boolean
+    +fecha_registro: DateTime
+    +verificado: Boolean
+    +foto_perfil_url: String
+    +ultimo_ingreso: DateTime
+
+    +registrar(): void
+    +autenticar(): boolean
+    +actualizarPerfil(): void
+    +desactivarCuenta(): void
+  }
+
+  class DispositivoIoT {
+    +id: UUID
+    +tipo: String <<Enum>>
+    +estado: String <<Enum>>
+    +codigo_serie: String
+    +ubicacion: String
+    +fecha_instalacion: DateTime
+    +usuario_id: UUID
+
+    +enviarAlerta(): Alerta
+    +revisarEstado(): String
+    +asociarUsuario(): void
+  }
+
+  class Reporte {
+    +id: UUID
+    +tipo: String <<Enum>>
+    +descripcion: Text
+    +fecha_hora: DateTime
+    +anonimo: Boolean
+    +estado: String <<Enum>>
+    +usuario_id: UUID
+    +ubicacion_id: UUID
+
+    +registrarReporte(): void
+    +adjuntarEvidencia(): void
+    +cambiarEstado(): void
+  }
+
+  class Alerta {
+    +id: UUID
+    +tipo_alerta: String <<Enum>>
+    +nivel_urgencia: Integer <<1-5>>
+    +fecha_hora: DateTime
+    +resuelta: Boolean
+    +ubicacion_id: UUID
+    +generado_por: String <<Enum>>
+
+    +emitirAlerta(): void
+    +notificarAutoridades(): void
+    +marcarResuelta(): void
+  }
+
+  class Evidencia {
+    +id: UUID
+    +tipo: String <<Enum>>
+    +url: String
+    +descripcion: String
+    +fecha_subida: DateTime
+    +reporte_id: UUID
+
+    +validarFormato(): Boolean
+    +descargar(): File
+  }
+
+  class IARegistro {
+    +id: UUID
+    +modelo: String
+    +evento_detectado: String
+    +confianza: Float <<0.0-1.0>>
+    +fecha_hora: DateTime
+    +evidencia_id: UUID
+
+    +clasificarEvento(): String
+    +actualizarModelo(): void
+  }
+
+  class Patrullero {
+    +id: UUID
+    +placa: String
+    +unidad: String
+    +activo: Boolean
+    +conductor: String
+    +latitud_actual: Decimal
+    +longitud_actual: Decimal
+    +ultimo_reporte: DateTime
+
+    +asignarMision(): void
+    +actualizarUbicacion(): void
+    +verEstado(): String
+  }
+
+  class AsignacionRespuesta {
+    +id: UUID
+    +fecha_asignacion: DateTime
+    +estado: String <<Enum>>
+    +patrullero_id: UUID
+    +reporte_id: UUID
+
+    +iniciarMision(): void
+    +finalizarMision(): void
+    +cancelarMision(): void
+  }
+
+  class CentroMonitoreo {
+    +id: UUID
+    +nombre: String
+    +direccion: String
+    +coordinador: String
+    +telefono: String
+
+    +notificarEmergencia(): void
+    +coordinarPatrullas(): void
+    +generarInforme(): File
+  }
+
+  class EventoSistema {
+    +id: UUID
+    +descripcion: String
+    +origen: String <<Enum>>
+    +fecha_hora: DateTime
+    +tipo: String <<Enum>>
+
+    +registrarEvento(): void
+    +auditar(): void
+  }
+
+  class SesionUsuario {
+    +id: UUID
+    +usuario_id: UUID
+    +ip_origen: String
+    +fecha_inicio: DateTime
+    +fecha_fin: DateTime
+    +token: String
+
+    +iniciarSesion(): void
+    +cerrarSesion(): void
+    +verificarToken(): Boolean
+  }
+
+  Pais "1" -- "0..*" Provincia
+  Provincia "1" -- "0..*" Ciudad
+  Ciudad "1" -- "0..*" Zona
+  Zona "1" -- "0..*" Ubicacion
+
+  Usuario "1" -- "0..*" Reporte : realiza >
+  Usuario "1" -- "0..*" DispositivoIoT : posee >
+  Usuario "1" -- "0..*" Alerta : activa >
+  Usuario "1" -- "0..*" SesionUsuario : inicia >
+
+  Reporte "1" -- "0..*" Evidencia : contiene >
+  Reporte "1" -- "1" Ubicacion : ocurre_en >
+  Reporte "1" -- "0..1" IARegistro : generado_por >
+  Reporte "1" -- "0..1" AsignacionRespuesta : responde >
+
+  Alerta "1" -- "1" Ubicacion : ocurre_en >
+  Alerta "1" -- "0..1" DispositivoIoT : generada_por >
+  Alerta "1" -- "1" CentroMonitoreo : gestionada_en >
+
+  AsignacionRespuesta "1" -- "1" Patrullero : asignado_a >
+  AsignacionRespuesta "1" -- "1" Reporte : responde_a >
+
+  DispositivoIoT "0..*" -- "1" Ubicacion : instalado_en >
+
+  EventoSistema "*" -- "1" Usuario : generado_por >
+}
+
+@enduml
