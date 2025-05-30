@@ -47,7 +47,7 @@ package "Sistema SOS Life" {
     +actualizarZonaRiesgo(): void
   }
 
-  class Usuario {
+  class User {
     +id: UUID
     +nombres: String
     +apellidos: String
