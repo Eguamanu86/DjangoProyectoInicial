@@ -22,6 +22,3 @@ A partir de ahora asegurate de estar dentro del entorno virtual (venv):
 ## Levantar servicio Django dentro de entorno virtual venv
         1. python manage.py runserver 0.0.0.0:8000
         Abrir navegador: http://localhost:8000/
-
-
-![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/Eguamanu86/DjangoProyectoInicial?utm_source=oss&utm_medium=github&utm_campaign=Eguamanu86%2FDjangoProyectoInicial&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
