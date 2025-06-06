@@ -28,7 +28,7 @@ class LoginView(View):
     def put(self, request, *args, **kwargs):
         data = {'resp': False}
         try:
-            cuenta = str(request.POST.get('usuario')).strip()
+            cuenta = str(request.POST).strip()
             user = authenticate()
             if user is not None:
                 if user.is_active:
@@ -43,7 +43,6 @@ class LoginView(View):
 
         except Exception as e:
             data['error'] = str(e)
-        return JsonResponse(data, status=200)
 
 
 def logout_user(request):
