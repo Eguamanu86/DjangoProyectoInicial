@@ -25,6 +25,26 @@ class LoginView(View):
             data['error'] = str(e)
         return JsonResponse(data, status=200)
 
+    def put(self, request, *args, **kwargs):
+        data = {'resp': False}
+        try:
+            cuenta = str(request.POST.get('usuario')).strip()
+            user = authenticate()
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    data['resp'] = True
+                    data['user'] = user.username
+                    return JsonResponse(data, status=200)
+                else:
+                    data['error'] = 'Login Fallido!, usuario no esta habilitado'
+            else:
+                data['error'] = 'Login Fallido!, credenciales incorrectas.'
+
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, status=200)
+
 
 def logout_user(request):
     logout(request)
