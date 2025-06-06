@@ -6,6 +6,11 @@ from django.shortcuts import redirect
 # Create your views here.
 class LoginView(View):
     def post(self, request, *args, **kwargs):
+        """
+        Authenticates a user based on provided username and password and logs them in.
+        
+        Processes a POST request containing 'usuario' and 'password' fields. If authentication is successful and the user is active, logs in the user and returns a JSON response indicating success and the username. If authentication fails or the user is inactive, returns a JSON response with an appropriate error message. All responses have HTTP status 200.
+        """
         data = {'resp': False}
         try:
             cuenta = str(request.POST.get('usuario')).strip()
@@ -26,6 +31,11 @@ class LoginView(View):
         return JsonResponse(data, status=200)
 
     def put(self, request, *args, **kwargs):
+        """
+        Attempts to authenticate and log in a user without credentials via a PUT request.
+        
+        Returns a JSON response indicating success and the username if authentication succeeds and the user is active, or an error message otherwise. Always responds with HTTP status 200.
+        """
         data = {'resp': False}
         try:
             cuenta = str(request.POST.get('usuario')).strip()
@@ -47,5 +57,8 @@ class LoginView(View):
 
 
 def logout_user(request):
+    """
+    Logs out the current user and redirects to the login page.
+    """
     logout(request)
     return redirect('/seguridad/login/')
