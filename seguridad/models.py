@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import CustomUserManager
 
 # Create your models here.
-class User(AbstractBaseUser, PermissionsMixin):
+class User(PermissionsMixin):
     pkid = models.BigAutoField(primary_key=True, editable=False)
     id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     username = models.CharField(verbose_name=_("Usuario"), max_length=191, unique=True)
@@ -25,8 +25,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True, null=True
     )
 
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "first_name", "last_name"]
 
     objects = CustomUserManager()
 
