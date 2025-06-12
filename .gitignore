@@ -15,12 +15,8 @@ __pycache__/
 db.sqlite3
 *.mo
 
-# Media files
-/media
-
 # Static file cache
 /staticfiles/
-/static/
 
 # Environment
 .env

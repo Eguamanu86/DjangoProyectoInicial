@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0 shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="UNEMI">
+    <meta name="keywords" content="Seguridad, Emergencias, IOT, inteligencia Artificial, Big Data, Blockchain, Robótica, Drones, Industria 4.0, Innovación, Tecnología, UNEMI, Universidad Estatal de Milagro">
+    <meta name="description" content="Universidad Estatal de Milagro. Proyecto Inteligente SOS Life.">
+    <title>Sistema Inteligente SOS Life.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.7/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/static/css/uikit.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/responsive.css" media="only screen and (max-width: 1200px)">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/loader.css">
+    {% block headcss %}
+    {% endblock %}
+</head>
+<body>
+<div id="load-content" class="loader-wrapper text-center">
+    <div class="spinner-border text-primary" role="status" style="margin: auto;margin-top: calc(40vh);width: 3rem; height: 3rem;">
+    </div><br>
+    <span class="text-white">Cargando..</span>
+</div>
+<header id="id-header">
+    {% block header %}
+    {% endblock %}
+</header>
+
+<main id="id-main">
+    {% block main %}
+    {% endblock %}
+
+    {% block frmodal %}
+    {% endblock %}
+</main>
+
+<footer id="id-footer">
+    {% block footer %}
+    {% endblock %}
+    {% csrf_token %}
+</footer>
+<script src="/static/lib/js.cookie.min.js"></script>
+<script src="/static/js/loader.js"></script>
+{% block js %}
+{% endblock %}
+{% block jscript %}
+{% endblock %}
+</body>

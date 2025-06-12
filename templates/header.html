@@ -1,0 +1,60 @@
+<nav class="navbar navbar-landing navbar-expand-lg navbar-dark bg-gradient-primary m-2">
+    <div class="container-fluid">
+        <a class="navbar-brand mr-auto" href="/" style="font-family:Arial; font-weight: bolder;font-size: 15px;letter-spacing:4px">
+                <i class="{{ logo_sistema }}"></i>
+                {{ nombre_sistema }} </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar1">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if persona.get_foto is not None %}
+                         <img src="{{ persona.get_foto }}" style="border-radius: 50%;box-shadow: 0 0 2px rgba(10, 10, 10, 0.3);width: 28px;height: 28px;position: relative;background: #fff;">
+                            {% else %}
+                            <i class="fa fa-user-circle fa fa-1x"></i>
+                        {% endif %}
+
+                        | {{ persona.nombres }} | (<em>{{ grupo.name }}</em>)
+                    </a>
+                    {% if user_grupos %}
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 13px">
+                            {% for g in user_grupos %}
+                                <a class="dropdown-item {% if g.id == grupo.id %} active {% endif %}" href="{% if g.id == grupo.id %}#{% else %}/?gpid={{ g.id }} {% endif %}">
+                                        {% if g.id == grupo.id %}<i class="fa fa-check"></i>{% endif %}
+                                        {{ usuario.last_name }} {{ usuario.first_name }} (<em>{{ g.name }}</em>)
+                                </a>
+                            {% endfor %}
+
+                        </div>
+                    {% endif %}
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa fa-calendar-check"></i>
+                    </a>
+                    <div class="dropdown-menu scrollable-menu pr-1" aria-labelledby="navbarDropdown" style="font-size: 13px">
+
+                    </div>
+                </li>
+                {% if usuario.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll text-white" href="/admin/" title="Mantenimiento">
+                            <i class="fa fa-cogs"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll text-white" href="/seguridad/salir/">
+                        <i class="fa fa-sign-out-alt"></i> Salir
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div> <!-- container //  -->
+</nav>
