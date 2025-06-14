@@ -17,7 +17,7 @@ form.addEventListener('submit', async (event) => {
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
 
-  const result = await login(email, password);
+  const result = await login(email, password); // Llamada a la función de autenticación
   messageDiv.classList.add('d-none'); // Ocultar mensaje de error al iniciar el proceso
 
   if (result.success) {

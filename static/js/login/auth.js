@@ -6,7 +6,7 @@ export async function login(email, password) {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-
+    // Request Post hacia servicio de autenticación - Django
     const response = await axiosInstance.post('/seguridad/auth/', formData);
 
     if (response.status == 200) {

@@ -76,5 +76,37 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
     search_fields = ["email", "username", "first_name", "last_name"]
-
 admin.site.register(User, UserAdmin)
+
+class ModuloAdmin(admin.ModelAdmin):
+    list_display = (
+        'url',
+        'nombre',
+        'tipo',
+        'clase',
+        'item_orden',
+        'activo',
+    )
+    list_per_page = 20
+    ordering = ('tipo','nombre')
+    search_fields = ('codigo','nombre')
+    list_filter = (
+        'tipo',
+        'activo'
+    )
+admin.site.register(Modulo,ModuloAdmin)
+
+class ModuloGrupoAdmin(admin.ModelAdmin):
+    list_display = (
+        'nombre',
+        'descripcion',
+        'prioridad',
+        'activo',
+    )
+    list_per_page = 20
+    ordering = ('prioridad','nombre',)
+    search_fields = ('nombre',)
+    list_filter = (
+        'activo',
+    )
+admin.site.register(ModuloGrupo,ModuloGrupoAdmin)

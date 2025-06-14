@@ -146,3 +146,12 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 AUTH_USER_MODEL = "seguridad.User"
+
+
+INFORMATION_SYSTEM = {
+    'autor': 'UNEMI',
+    'logo_sistema': 'fas fa-radiation-alt fa-2x',
+    'nombre_sistema': 'UNEMI - Sistema de Gestión de Emergencias',
+    'website': 'www.unemi.edu.ec',
+    'version': '1.0.0',
+}
