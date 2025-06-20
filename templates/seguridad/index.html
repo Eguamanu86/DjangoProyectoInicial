@@ -97,52 +97,6 @@
                 <!-- Area Chart -->
                 <div class="col-md">
                     <div class="list-group filter-wrap">
-                        {% if recordatorio %}
-                            <div class="alert alert-info mt-1 ms-recordatorio">
-                                <a href="javascript:;" class="close" data-dismiss="alert">×</a>
-                                <h6><strong>AVISO IMPORTANTE</strong></h6>
-                                Estimado/a {{ persona }} se informa que el proceso <b>{{ encuesta.nombre_encuesta }}</b>
-                                se encuentra habilitado hasta el día <b>{{ encuesta.fecha_fin|date:"d-m-Y H:i" }}</b>
-                            </div>
-                        {% elif ingreso_notas %}
-                            <div class="alert alert-info mt-1 ms-recordatorio">
-                                <a href="javascript:;" class="close" data-dismiss="alert">×</a>
-                                <h6><strong>AVISO IMPORTANTE</strong></h6>
-                                Estimado/a {{ persona }} se informa que el cronograma de ingreso de notas es el
-                                siguiente:<br>
-                                {% for m in apertura_notas %}
-                                    <li><b>{{ m.parcial }} del </b> {{ m.inicio|date:"d-m-Y H:i" }}
-                                        <b>hasta</b> {{ m.fin|date:"d-m-Y H:i" }}</li>
-                                {% endfor %}
-                            </div>
-                        {% elif certificado_gratuidad %}
-                            <div class="alert alert-info mt-1 ms-recordatorio">
-                                <a href="javascript:;" class="close" data-dismiss="alert">×</a>
-                                <h6><strong>AVISO IMPORTANTE</strong></h6>
-                                Estimado/a {{ persona }}, se informa que el documento de constancia de gratuidad (SIAU) debe ser cargado en Saya hasta el: <b>{{ periodo.cierre_matricula|date:"d-m-Y" }}</b><br>
-
-                            </div>
-                        {% endif %}
-                        {% if recordatorio_par %}
-                            <div class="alert alert-info mt-1 ms-recordatorio">
-                                <a href="javascript:;" class="close" data-dismiss="alert">×</a>
-                                <h6><strong>AVISO IMPORTANTE</strong></h6>
-                                Estimado/a {{ persona }} se informa que el proceso <b>{{ eval_par.nombre_encuesta }}</b>
-                                se encuentra habilitado hasta el día <b>{{ eval_par.fecha_fin|date:"d-m-Y H:i" }}</b>
-                            </div>
-                        {% endif %}
-
-                        {% if encuestas %}
-                            {% for eval_encuesta in encuestas %}
-                                <div class="alert alert-info mt-1 ms-recordatorio">
-                                    <a href="javascript:;" class="close" data-dismiss="alert">×</a>
-                                    <h6><strong>AVISO IMPORTANTE</strong></h6>
-                                    Estimado/a {{ persona }} dirigirse al módulo <b><a href="{% url "listado_encuesta" %}">Encuestas</a></b> y responder <b>{{ eval_encuesta.nombre_encuesta }}</b>
-                                    estará habilitado hasta el día <b>{{ eval_encuesta.fecha_fin|date:"d-m-Y H:i" }}</b>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-
                         <article class="list-group-item p-0">
                             {% for modulo_grupo in modulos_grupos %}
                                 <header class="filter-header card-header">

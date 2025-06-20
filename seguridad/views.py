@@ -51,6 +51,12 @@ class IndexPageView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['system'] = INFORMATION_SYSTEM
         context['has_logged_in'] = True
+
+
+        context['user_grupos'] = self.request.user.groups.all()
+        context['grupo'] = grupo = context['user_grupos'][0]
+        context['modulos_grupos'] = grupo.modulogrupo_set.all().order_by('prioridad')
+
         return context
 
 def logout_user(request):
