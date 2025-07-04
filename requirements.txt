@@ -3,3 +3,5 @@ Pillow
 psycopg2
 python-dotenv
 django-crum
+django-crispy-forms
+crispy-bootstrap4

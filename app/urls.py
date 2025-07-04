@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('seguridad/', include('seguridad.urls')),
     path('', IndexPageView.as_view(), name='index'),
+    path('patrulleros/', include('patrulleros.urls')),
 ]

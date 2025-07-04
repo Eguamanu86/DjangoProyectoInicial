@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+{% block main %}
+<h2>{{ titulo }}</h2>
+<article class="container-fluid" style="margin-top: 3.5rem">
+    <div class="row">
+        <div class="col">
+            <nav id="siteBreadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb p-2">
+                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Patrulleros</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Ficha de Patrullero : {{ accion|default:"Nuevo Patrullero" }}
+                    </div>
+                    <div class="card-body">
+                        <ul id="tabsJustified" class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="" data-target="#datos_generales" data-toggle="tab"
+                                   class="nav-link small text-uppercase active">
+                                    <i class="far fa-address-card"></i> Datos Generales
+                                </a>
+                            </li>
+                        </ul>
+                        <br>
+                        <div id="tabsJustifiedContent" class="tab-content">
+                            <div id="datos_generales" class="tab-pane fade active show">
+                               {% csrf_token %}
+                               {{ form|crispy }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success float-right ml-2" type="submit">
+                            <i class="fa fa-save"></i> Guardar Registro
+                        </button>
+                        <a href="{% url 'patrullero_list' %}" class="btn btn-danger float-right">
+                            <i class="fa fa-arrow-left"></i> Atrás
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</article>
+{% endblock %}

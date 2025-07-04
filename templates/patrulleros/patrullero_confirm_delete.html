@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block main %}
+<article class="container-fluid" style="margin-top: 3.5rem">
+    <div class="row">
+        <div class="col">
+            <nav id="siteBreadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb p-2">
+                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'patrullero_list' %}">Patrulleros</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="post">
+                <div class="card mb-4">
+                    <div class="card-header bg-danger text-white">
+                        Confirmar eliminación
+                    </div>
+                    <div class="card-body">
+                        {% csrf_token %}
+                        <p class="lead">
+                            ¿Estás seguro que deseas eliminar el patrullero <strong>{{ patrullero }}</strong>?
+                        </p>
+                        <ul>
+                            <li><b>Placa:</b> {{ patrullero.placa }}</li>
+                            <li><b>Unidad:</b> {{ patrullero.unidad }}</li>
+                            <li><b>Conductor:</b> {{ patrullero.conductor }}</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-danger float-right ml-2">
+                            <i class="fa fa-trash"></i> Eliminar
+                        </button>
+                        <a href="{% url 'patrullero_list' %}" class="btn btn-secondary float-right">
+                            <i class="fa fa-arrow-left"></i> Cancelar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</article>
+{% endblock %}

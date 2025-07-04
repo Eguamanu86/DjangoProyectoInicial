@@ -3,14 +3,15 @@ from crum import get_current_user
 # Create your models here.
 
 class Patrullero(models.Model):
-    placa = models.CharField(max_length=20)
-    unidad = models.CharField(max_length=50)
+    placa = models.CharField(max_length=20,blank=True, null=True)
+    unidad = models.CharField(max_length=50,blank=True, null=True)
+    foto = models.ImageField(upload_to='persona/', verbose_name='Archivo foto', blank=True, null=True)
     activo = models.BooleanField(default=True)
-    conductor = models.CharField(max_length=100)
-    latitud_actual = models.DecimalField(max_digits=9, decimal_places=6)
-    longitud_actual = models.DecimalField(max_digits=9, decimal_places=6)
+    conductor = models.CharField(max_length=100,blank=True, null=True)
+    latitud_actual = models.DecimalField(max_digits=9, decimal_places=6,blank=True, null=True)
+    longitud_actual = models.DecimalField(max_digits=9, decimal_places=6,blank=True, null=True)
     ultimo_reporte = models.DateTimeField(blank=True, null=True)
-    telefono_contacto = models.CharField(max_length=20, blank=True)
+    telefono_contacto = models.CharField(max_length=20, blank=True, null=True)
     estado_actual = models.CharField(
         max_length=20,
         choices=[
@@ -59,8 +60,8 @@ class AsignacionRespuesta(models.Model):
 
     fecha_asignacion = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(max_length=20, choices=ESTADO)
-    patrullero = models.ForeignKey(Patrullero, on_delete=models.PROTECT)
-    reporte = models.ForeignKey('reportes.Reporte', on_delete=models.PROTECT)
+    patrullero = models.ForeignKey(Patrullero, on_delete=models.PROTECT,blank=True, null=True)
+    reporte = models.ForeignKey('reportes.Reporte', on_delete=models.PROTECT,blank=True, null=True)
 
     creadopor = models.CharField(max_length=100, blank=True, null=True, editable=False)
     creadodate = models.DateTimeField(auto_now_add=True,null=True)
